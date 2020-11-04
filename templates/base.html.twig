@@ -4,9 +4,13 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        {{ encore_entry_link_tags('css/app') }}
     </head>
     <body>
-        {% block body %}{% endblock %}
+            {% include "partials/_header.html.twig" %}
+            {% block body %}{% endblock %}
+            {% include "partials/_footer.html.twig" %}
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

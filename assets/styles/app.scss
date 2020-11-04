@@ -1,0 +1,229 @@
+/****** Variables ******/
+
+
+/******** Mixins ********/
+@mixin nav($direction) {
+    display        : flex;
+    flex-direction : $direction;
+    text-transform : uppercase;
+    letter-spacing : 1px;
+    margin-bottom  : -73px;
+    padding        : 2.5rem 0;
+    margin         : 10px;
+    text-align     : center;
+    width          : 50%;
+}
+
+@mixin div-products($width) {
+	margin-bottom : 2rem;
+	text-align    : center;
+    border        : 10px solid black;
+	display       : block;
+	width         :$width;
+}
+
+
+/******** blocks ********/
+%header-style {
+    background-color    : black;
+	background-size     : cover;
+    padding             :5rem;
+    max-width           : 100%;
+	color               : white;
+    margin              : auto;
+    display: flex;
+}
+
+%header {
+	@extend %header-style;
+
+    .nav {
+        justify-content : space-around;
+        display         : flex;
+        align-items     : baseline;
+        width           : 50%;
+    }
+
+    .nav nav {
+        @include nav("row");
+    }
+
+    .nav nav a {
+        text-shadow : 0 0 0.5rem rgba(0, 0, 0, 0.1);
+        font-family : "Amaranth";
+        color       : white;
+        padding     : 1rem 1.5rem;
+        size        : 2rem;
+    }
+
+    .nav nav a:hover {
+        background-color : red;
+	    color            : white;
+    }
+
+    .member {
+        text-align        :center;
+        display           : flex;
+        align-items       : center;
+        margin-top        : 2.5rem;
+        width: 50%;
+    }
+
+    .member img {
+        margin-left : 4rem;
+        width       : 9rem;
+    }
+
+    .nav .member h2:hover {
+        color :red;
+    } 
+}
+
+%hover-h2 {
+	color : red;
+}
+
+%div-cars {
+	justify-content : space-around; 
+    display         : flex;
+    flex-wrap       : wrap;
+    margin          : 2rem auto ;
+}
+
+%button-style {
+    background-color : black;
+	text-transform   : uppercase;
+	display          : inline-block;
+	color            : white;
+	letter-spacing   : 0.2rem;
+	padding          : 1.5rem 2rem;
+	margin           : 1rem 0;
+    text-align       : center;
+    &:hover {
+        @extend %hover-h2;
+    }
+}
+
+%style-img {
+	-webkit-transition : .3s ease-in-out;
+	-webkit-transform  : scale(1);
+	transition : .3s ease-in-out;
+	transform  : scale(1);
+    margin     : 0 10px;
+	width      :100%;
+	text-align :center;
+    display    : block;
+    margin:auto;
+}
+
+
+/*************************************************/
+/********************* GLOBAL ********************/
+/*************************************************/
+* {
+	text-decoration : none;
+	box-sizing      : border-box;
+	transition      : all .1s ease 0s;
+	margin          : 0px;
+	padding         : 0px;
+	outline         : none;
+} 
+
+html {
+    font-size: 62.5%;
+
+    body {
+        background-repeat : no-repeat;
+        background-color  : #1C1F23;
+        background-size   : cover;
+        margin            : auto;
+        padding           : 0;
+        font-size         : 1.6rem;
+        line-height       : 1.6;
+        font-size         : 1.6rem;
+        color             : rgba(0,0,0,0.5);	
+        font-family       : "Open Sans", Arial, sans-serif;
+
+        .container {
+            text-align: center;
+            width: 80%;
+            margin: auto;
+        }
+
+        a,p,span,h1,h2 {
+            color : white;
+        }
+    
+        img {
+            max-width: 100%;
+        }
+    }
+ 
+}
+
+
+
+
+
+
+/***************************************************/
+/*********************** MAIN **********************/
+/***************************************************/
+
+/***** HEADER VISITEUR *****/
+.header_visiteur {
+    @extend %header;
+ }
+
+ /***** Véhicule index / Véhicule catégory *****/
+#cars  {
+    @extend %div-cars;
+    
+    #product {
+        @include div-products(30%);
+
+        .description {
+            text-align : center;
+            margin     : auto;
+            width      :100%;
+        }
+        .btn {
+            @extend %button-style;
+        }
+    }
+
+    .img {
+        @extend %style-img;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ /*************************************************/
+/********************* FOOTER ********************/
+/*************************************************/
+footer {
+	background-position : top;
+	background-repeat   : no-repeat;
+	background-color    : black;
+	background-size     : cover;
+    margin              : auto;
+    text-align: center;
+	width               : 100%;
+	color               : white;
+    padding             : 2rem;
+
+    h2:hover {
+        @extend %hover-h2;
+    }
+
+}
