@@ -7,12 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -56,9 +57,15 @@ class User
      */
     private $cars;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="booker")
+     */
+    private $bookings;
+
     public function __construct()
     {
         $this->cars = new ArrayCollection();
+        $this->car = new ArrayCollection();
     }
 
     /**
@@ -72,7 +79,7 @@ class User
     public function initializeSlug() {
         if(empty($this->slug)) {
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->firstname.' '.$this->lastName);
+            $this->slug = $slugify->slugify($this->firstName.' '.$this->lastName);
         }
     }
 
@@ -183,5 +190,27 @@ class User
         return $this;
     }
 
-   
+   public function getRoles() {
+    return ['ROLE_USER'];
+   }
+
+   public function getPAssword() {
+       return $this->hash;
+   }
+
+   public function getSalt() {}
+
+   public function getUsername() {
+       return $this->email;
+   }
+
+   public function eraseCredentials() {}
+
+   /**
+    * @return Collection|Booking[]
+    */
+   public function getBookings(): Collection
+   {
+       return $this->bookings;
+   }
 }
