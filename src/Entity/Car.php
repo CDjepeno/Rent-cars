@@ -55,7 +55,7 @@ class Car
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="cars")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cars")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

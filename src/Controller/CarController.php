@@ -10,12 +10,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CarController extends AbstractController
 {
     /**
-     * @Route("/", name="cars_home")
+     * @Route("/{page<\d+>?1}", name="cars_home")
      */
-    public function index(CarRepository $car): Response
+    public function index(CarRepository $car, $page): Response
     { 
+        $limit = 6;
+
+        $start = $page * $limit - $limit;
+
+        $total = count($car->findAll());
+
+        $pages = ceil($total / $limit);
+
         return $this->render('car/index.html.twig', [
-            'cars' => $car->findAll()
+            'cars' => $car->findBy([],[],$limit,$start),
+            'page' => $page,
+            'pages' => $pages
         ]);
     }
 }

@@ -109,7 +109,6 @@ class Appfixtures extends Fixture
                     }
                     $manager->persist($car);
                 }
-
             }   
         $manager->flush();
     }

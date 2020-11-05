@@ -1,3 +1,7 @@
+$primary: darken(#428bca, 20%);
+// @import "~bootstrap/scss/bootstrap";
+@import url('./bootstrap.min.css');
+
 /****** Variables ******/
 
 
@@ -27,11 +31,13 @@
 %header-style {
     background-color    : black;
 	background-size     : cover;
-    padding             :5rem;
+    padding             : 5rem;
     max-width           : 100%;
 	color               : white;
     margin              : auto;
-    display: flex;
+    display             : flex;
+    align-items         : baseline;
+    height              : 20rem;
 }
 
 %header {
@@ -54,6 +60,7 @@
         color       : white;
         padding     : 1rem 1.5rem;
         size        : 2rem;
+        margin-right: 4rem;
     }
 
     .nav nav a:hover {
@@ -173,6 +180,10 @@ html {
 /***** HEADER VISITEUR *****/
 .header_visiteur {
     @extend %header;
+
+    .a {
+        margin-right: 2rem;
+    }
  }
 
  /***** Véhicule index / Véhicule catégory *****/
