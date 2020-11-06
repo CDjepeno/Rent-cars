@@ -62,7 +62,7 @@ class Appfixtures extends Fixture
                 $manager ->persist($category);
 
                 // Nous gérons les voitures
-                for ($j=0; $j<= mt_rand(1,5); $j++) {
+                for ($j=0; $j<= mt_rand(10,15); $j++) {
                     $car = new Car();
 
                     $title           = $faker->sentence(2);

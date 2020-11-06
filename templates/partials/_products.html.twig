@@ -1,0 +1,20 @@
+<article id="product">
+    <section class="img">
+        <a href="#">
+        <img src="{{car.coverImage}}" alt="image de {{ car.title }}" />
+        </a>
+    </section>
+    <section class="description">
+        <h2 class ="card-title my-4">{{car.title}}</h2>
+        <p>{{car.price}} &euro; / jour</p>   
+    </section>
+    <div>
+        {# <pre>
+            {{ dump(car.category) }}
+        </pre> #}
+        {# {% for c in car.category %} #}
+            <bold class="text-muted text-primary text-italic">#{{ car.category.name }}</bold>
+        {# {% endfor %} #}
+    </div>
+    <a class="btn" href="#">Voir ce produit</a>
+</article>

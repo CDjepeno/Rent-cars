@@ -1,8 +1,8 @@
-$primary: darken(#428bca, 20%);
 // @import "~bootstrap/scss/bootstrap";
 @import url('./bootstrap.min.css');
 
 /****** Variables ******/
+$primary: darken(#428bca, 20%);
 
 
 /******** Mixins ********/
@@ -187,9 +187,13 @@ html {
  }
 
  /***** Véhicule index / Véhicule catégory *****/
-#cars  {
+#cars.row  {
     @extend %div-cars;
-    
+    .col-md-9 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+    }
     #product {
         @include div-products(30%);
 
@@ -206,8 +210,21 @@ html {
     .img {
         @extend %style-img;
     }
-}
 
+    .filter {
+        display:block;
+        position:sticky;
+        top:2rem;
+
+        label.form-check-label {
+            color: white;
+            text-align: left;
+        }  
+    }
+  
+
+}
+  
 
 
 

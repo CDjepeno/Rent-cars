@@ -4,39 +4,19 @@
 
 {% block body %}
 <div class="container">
-    <h1>Voici la liste de nos véhicules à louer !</h1>
-    <section id="cars">
-        {% for car in cars %}
-            <article id="product">
-                <h2>{{car.title}}</h2>
-                <section class="img">
-                    <a href="#">
-                    <img src="{{car.coverImage}}" alt="#" />
-                    </a>
-                </section>
-                <section class="description">
-                    <h2></h2>
-                    <p>{{car.price}} &euro; / jour</p>
-                </section>
-                <a class="btn" href="#">Voir ce produit</a>
-            </article>
-        {% endfor %}
+    <h1 class="my-5">Voici la liste de nos véhicules à louer !</h1>
+    <section class="row" id="cars"  >
+        <div class="col-md-3 d-flex" >
+            {% include 'partials/_filterCar.html.twig' with {'form' : form} %}
+        </div>
+        <div class="col-md-9">
+            {% for car in cars %}
+                {% include "partials/_products.html.twig" with {'car' : car} %}
+            {% endfor %}
+        </div>
     </section>
     <div>
-        <ul class="pagination pagination-lg d-flex justify-content-center">
-            <li class="page-item {% if page == 1 %}disabled{% endif %}">
-                <a class="page-link" href="{{ path('cars_home', {'page' : page - 1}) }}">&laquo;</a>
-            </li>
-            {% for i in 1.. pages %}    
-                <li class="page-item {% if i == page %}active{% endif %}">
-                    <a class="page-link" href="{{ path('cars_home', {'page' : i}) }}">{{ i }}</a>
-                </li>
-            {% endfor %}
-            
-            <li class="page-item {% if page == pages %}disabled{% endif %}">
-                <a class="page-link " href="{{ path('cars_home', {'page' : page + 1 }) }}">&raquo;</a>
-            </li>
-        </ul>
+        {% include "partials/_pagination.html.twig" with {'page' : pagination.currentpage, 'pages' : pagination.pages} %}
     </div>
 </div>    
 {% endblock %}
