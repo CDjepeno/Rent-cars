@@ -14,7 +14,11 @@
         {{ form_row(form.max) }}
     </div>
 </div>
-
-<button type="submit" class="btn btn-primary w-100">Filter</button>
+    <pre>
+        {{ dump(min,max) }}
+    </pre>
+<button type="submit" class="btn btn-primary w-100 my-4">Filter</button>
+    <div id="price-slider" data-min="{{min}}" data-max="{{max}}">
+    </div>
 
 {{ form_end(form) }}

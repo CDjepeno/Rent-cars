@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Data\SearchCarData;
 use App\Entity\Car;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Data\SearchCarData;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Car|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,17 +16,39 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CarRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public $paginator;
+
+    public function __construct(ManagerRegistry $registry,PaginatorInterface $paginator)
     {
         parent::__construct($registry, Car::class);
+        
+        $this->paginator = $paginator;
     }
 
     /**
-     * Récupère les produits en lien avec une recherche
+     * Récupère le prix minimum et maximum correspondant a une recherche
      *
-     * @return Car[]
+     * @param SearchCarData $search
+     * @return enteger[]
      */
-    public function findSearch(SearchCarData $search) {
+    public function findMinMax(SearchCarData $search) {
+
+        $result= $this->getSearchQuery($search, true)
+                      ->select('Min(car.price) as min', 'MAX(car.price) as max')
+                      ->getQuery()
+                      ->getScalarResult();
+        // dd($result);
+                
+        return [(int)$result[0]['min'],(int)$result[0]['max']];
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param SearchCarData $search
+     * @return QueryBuilder
+     */
+    private function getSearchQuery(SearchCarData $search, $ignorePrice = false) {
         $query = $this 
         ->createQueryBuilder('car')
         ->join('car.category', 'c')
@@ -36,33 +59,50 @@ class CarRepository extends ServiceEntityRepository
             $query = $query
             ->andWhere('car.title LIKE :car')
             ->setParameter('car', "%{$search->car}%");
-            
         }
         
-        if(!empty($search->min)) {
+        if(!empty($search->min && $ignorePrice === false)) {
             $query = $query
             ->andWhere('car.price >= :min')
-            ->setParameter('min', $search->min);
-            // dd($query);
-            
+            ->setParameter('min', $search->min);            
         }
         
-        if(!empty($search->max)) {
+        if(!empty($search->max && $ignorePrice === false)) {
             $query = $query
             ->andWhere('car.price <= :max')
-            ->setParameter('max', $search->max);
-            // dd($query);
-            
+            ->setParameter('max', $search->max);            
         }
         
         if(!empty($search->category)) {
             $query = $query
             ->andWhere('c.id IN (:category)')
             ->setParameter('category', $search->category);
+            // dd($query);
         }
 
-            return $query->getQuery()->getResult();
+        return $query;
     }
+
+    /**
+     * Récupère les produits en lien avec une recherche
+     *
+     * @return PaginatorInterface
+     */
+    public function findSearch(SearchCarData $search) {
+
+        $query = $this->getSearchQuery($search)->getQuery();
+ 
+         return $this->paginator->paginate(
+             $query,
+             $search->page,
+             6
+         );
+     }
+
+
+
+
+
 
     // /**
     //  * @return Car[] Returns an array of Car objects

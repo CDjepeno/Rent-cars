@@ -47,11 +47,7 @@ class SearchCarType extends AbstractType
                 'attr'    => [
                     'placeholder' => 'Prix max' 
                 ]
-            ])
-         
-        ;
-            
-           
+            ])    
         ;
     }
 

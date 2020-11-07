@@ -28,4 +28,10 @@ class SearchCarData
      *
      */
     public $max;
+
+    /**
+     *
+     * @var integer
+     */
+    public $page = 1;
 }

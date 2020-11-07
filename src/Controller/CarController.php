@@ -21,26 +21,22 @@ class CarController extends AbstractController
      */
     public function index(Pagination $pagination, $page,Request $request, CarRepository $car): Response
     { 
-
         $data = new SearchCarData();
         $form = $this->createForm(SearchCarType::class,$data);
 
+        $data->page = $request->get('page',1);
+        
+        [$min,$max] = $car->findMinMax($data);
         $form->handleRequest($request);
 
-        
-        if($form->isSubmitted() && $form->isValid()) {
-            $cars = $car->findSearch($data);
-            // dd($cars);
-        }
+        $cars = $car->findSearch($data);
 
-        $pagination->setEntityClass(Car::class)
-                   ->setCurrentPage($page);
-        
-        
         return $this->render('car/index.html.twig', [
-            'pagination' => $pagination,
-            'form'       => $form->createView(),
-            'cars'        => $cars
+            'form'   => $form->createView(),
+            'cars'   => $cars,
+            'min'    => $min,
+            'max'    => $max,
+
         ]);
     }
 }
