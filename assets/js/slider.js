@@ -20,15 +20,14 @@ if(slider) {
     });
 
    
-range.on('slide', function(values, handle) {
+    range.on('slide', function(values, handle) {
 
-    if(handle === 0) {
-        min.value = Math.round(values[0]);
-    }
+        if(handle === 0) {
+            min.value = Math.round(values[0]);
+        }
 
-    if(handle === 1) {
-        max.value = Math.round(values[1]);
-    }
-    console.log(values, handle)
+        if(handle === 1) {
+            max.value = Math.round(values[1]);
+        }
     });
 }

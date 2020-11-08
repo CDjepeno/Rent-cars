@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -25,7 +26,15 @@ Encore
      */
     .addEntry('js/app', './assets/js/slider.js')
     .addStyleEntry('css/app', './assets/styles/app.scss')
-    //.addEntry('page2', './assets/page2.js')
+    .copyFiles({
+        from: './assets/img',
+        // optional target path, relative to the output dir
+        to: 'images/[path][name].[ext]',
+        // if versioning is enabled, add the file hash too
+        to: 'images/[path][name].[hash:8].[ext]',
+        // only copy files matching this pattern
+        pattern: /\.(png|jpg|jpeg)$/
+    })
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

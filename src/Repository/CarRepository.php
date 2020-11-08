@@ -37,7 +37,6 @@ class CarRepository extends ServiceEntityRepository
                       ->select('Min(car.price) as min', 'MAX(car.price) as max')
                       ->getQuery()
                       ->getScalarResult();
-        // dd($result);
                 
         return [(int)$result[0]['min'],(int)$result[0]['max']];
     }

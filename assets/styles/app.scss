@@ -30,8 +30,9 @@ $primary: darken(#428bca, 20%);
 
 /******** blocks ********/
 %header-style {
-    background-color    : black;
-	background-size     : cover;
+    background-image    : url('../img/header.jpg');
+    background-size     : cover;
+    background-position : 45% 28%;
     padding             : 5rem;
     max-width           : 100%;
 	color               : white;
@@ -45,46 +46,49 @@ $primary: darken(#428bca, 20%);
 	@extend %header-style;
 
     .nav {
-        justify-content : space-around;
         display         : flex;
+        justify-content : center;
         align-items     : baseline;
         width           : 50%;
-    }
 
-    .nav nav {
-        @include nav("row");
-    }
-
-    .nav nav a {
-        text-shadow : 0 0 0.5rem rgba(0, 0, 0, 0.1);
-        font-family : "Amaranth";
-        color       : white;
-        padding     : 1rem 1.5rem;
-        size        : 2rem;
-        margin-right: 4rem;
-    }
-
-    .nav nav a:hover {
-        background-color : red;
-	    color            : white;
+        nav {
+            @include nav("row");
+    
+            a {
+                text-shadow : 0 0 0.5rem rgba(0, 0, 0, 0.1);
+                font-family : "Amaranth";
+                color       : white;
+                padding     : 1rem 1.5rem;
+                size        : 2rem;
+    
+                &:hover {
+                    color : red;
+                }
+            }
+        }
     }
 
     .member {
-        text-align        :center;
         display           : flex;
+        justify-content   : center;
+        text-align        : center;
         align-items       : center;
         margin-top        : 2.5rem;
-        width: 50%;
-    }
+        width             : 50%;
 
-    .member img {
-        margin-left : 4rem;
-        width       : 9rem;
-    }
+        img {
+            margin-left : 4rem;
+            width       : 9rem;
+            
+            &:hover {
+                @extend %hover-img-up; 
+            }
+        } 
 
-    .nav .member h2:hover {
-        color :red;
-    } 
+        h2:hover {
+            color :red;
+        } 
+    }   
 }
 
 %hover-h2 {
@@ -122,6 +126,16 @@ $primary: darken(#428bca, 20%);
 	text-align :center;
     display    : block;
     margin:auto;
+}
+
+%hover-img-down {
+    -webkit-transform : scale(0.9);
+	transform         : scale(0.9);
+}
+
+%hover-img-up {
+    -webkit-transform : scale(1.0);
+	transform         : scale(1.1);
 }
 
 
@@ -166,13 +180,15 @@ html {
             max-width: 100%;
         }
     }
- 
 }
 
+*:hover {
+	transition : all .3s ease 0s;
+}
 
-
-
-
+a, a:hover, a:visited, a:active {
+	text-decoration : none;
+}
 
 /***************************************************/
 /*********************** MAIN **********************/
@@ -212,15 +228,32 @@ html {
         @extend %style-img;
     }
 
-    .filter {
+    form {
+        background-color: black;
+        padding: 3rem;
         display:block;
         position:sticky;
-        top:2rem;
+        top:20rem;
+        text-align: left;
 
         label.form-check-label {
             color: white;
-            text-align: left;
+            margin-left: 2rem;
         }  
+
+        .noUi-connect {
+            background: blue;
+        }
+
+        #car {
+            font-size: 1.5rem;
+        }
+        #min {
+            font-size: 1.5rem;
+        }
+        #max {
+            font-size: 1.5rem;
+        }
     }
   
 
@@ -253,6 +286,13 @@ footer {
 
     h2:hover {
         @extend %hover-h2;
+    }
+
+    img {
+        width: 20rem;
+        &:hover {
+            @extend %hover-img-up;
+        } 
     }
 
 }
