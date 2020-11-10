@@ -5,7 +5,9 @@
 <h4>Catégories</h4>
 {{ form_row(form.category) }}
 
+
 <h4 class='mr-20'>Prix</h4>
+
 <div class="row">
     <div class="col-6">
         {{ form_row(form.min) }}
@@ -14,6 +16,7 @@
         {{ form_row(form.max) }}
     </div>
 </div>
+
 <button type="submit" class="btn btn-danger w-100 my-4">Filter</button>
     <div id="price-slider" data-min="{{min}}" data-max="{{max}}">
     </div>

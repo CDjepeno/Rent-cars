@@ -47,8 +47,7 @@ class SearchCarType extends AbstractType
                 'attr'    => [
                     'placeholder' => 'Prix max' 
                 ]
-            ])    
-        ;
+            ]);    
     }
 
     public function configureOptions(OptionsResolver $resolver)

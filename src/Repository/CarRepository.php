@@ -58,6 +58,7 @@ class CarRepository extends ServiceEntityRepository
             $query = $query
             ->andWhere('car.title LIKE :car')
             ->setParameter('car', "%{$search->car}%");
+
         }
         
         if(!empty($search->min && $ignorePrice === false)) {
@@ -77,7 +78,6 @@ class CarRepository extends ServiceEntityRepository
             ->andWhere('c.id IN (:category)')
             ->setParameter('category', $search->category);
         }
-
         return $query;
     }
 

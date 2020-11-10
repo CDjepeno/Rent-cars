@@ -29,14 +29,18 @@ class CarController extends AbstractController
         [$min,$max] = $car->findMinMax($data);
         $form->handleRequest($request);
 
-        $cars = $car->findSearch($data);
+        $cars = $car->Search($data);
 
-        return $this->render('car/index.html.twig', [
+
+        $pagination->setEntityClass(Car::class)
+                   ->setCurrentPage($page);
+        
+        
+        return $this->render('.twig', [
             'form'   => $form->createView(),
             'cars'   => $cars,
             'min'    => $min,
             'max'    => $max,
-
         ]);
     }
 
@@ -51,8 +55,8 @@ class CarController extends AbstractController
 
         $cars = $car->getCarsByCategory($id);
        
-        return $this->render('car/category.html.twig', [
-            'cars' => $cars
-        ]);
-    }
-}
+        return $this->render('car/category.html.twig',[
+                  'cars' => $cars,
+            'pagination' => $pagination,
+            'form'       => $form->createView(),
+        ]
