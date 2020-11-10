@@ -16,15 +16,15 @@ class CarController extends AbstractController
 {
     /**
      * Permet d'afficher les premiers articles sélectionner dans la pagination
-     * 
+     *
      * @Route("/{page<\d+>?1}", name="cars_home")
      */
-    public function index(Pagination $pagination, $page,Request $request, CarRepository $car): Response
-    { 
+    public function index(Pagination $pagination, $page, Request $request, CarRepository $car): Response
+    {
         $data = new SearchCarData();
-        $form = $this->createForm(SearchCarType::class,$data);
+        $form = $this->createForm(SearchCarType::class, $data);
 
-        $data->page = $request->get('page',1);
+        $data->page = $request->get('page', 1);
         
         [$min,$max] = $car->findMinMax($data);
         $form->handleRequest($request);
@@ -46,17 +46,18 @@ class CarController extends AbstractController
 
     /**
      * Permet de récupérer tous les véhicules d'une catégory
-     * 
+     *
      * @Route("/category/{id}", name="cars_category")
      *
      * @return void
      */
-    public function getCarsByCategory(CarRepository $car, $id) {
-
+    public function getCarsByCategory(CarRepository $car, $id)
+    {
         $cars = $car->getCarsByCategory($id);
        
-        return $this->render('car/category.html.twig',[
-                  'cars' => $cars,
-            'pagination' => $pagination,
-            'form'       => $form->createView(),
-        ]
+        return $this->render('car/category.html.twig', [
+                  'cars' => $cars
+        ]);
+    }
+    
+}
