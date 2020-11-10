@@ -39,4 +39,20 @@ class CarController extends AbstractController
 
         ]);
     }
+
+    /**
+     * Permet de récupérer tous les véhicules d'une catégory
+     * 
+     * @Route("/category/{id}", name="cars_category")
+     *
+     * @return void
+     */
+    public function getCarsByCategory(CarRepository $car, $id) {
+
+        $cars = $car->getCarsByCategory($id);
+       
+        return $this->render('car/category.html.twig', [
+            'cars' => $cars
+        ]);
+    }
 }

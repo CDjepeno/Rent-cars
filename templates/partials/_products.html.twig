@@ -9,12 +9,7 @@
         <p>{{car.price}} &euro; / jour</p>   
     </section>
     <div>
-        {# <pre>
-            {{ dump(car.category) }}
-        </pre> #}
-        {# {% for c in car.category %} #}
-            <bold class="text-muted text-primary text-italic">#{{ car.category.name }}</bold>
-        {# {% endfor %} #}
+        <bold class="text-muted text-primary text-italic">#{{ car.category.name }}</bold>
     </div>
     <a class="btn" href="#">Voir ce produit</a>
 </article>

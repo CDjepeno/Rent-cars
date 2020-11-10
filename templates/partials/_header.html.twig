@@ -6,16 +6,16 @@
                 <a href="#">
                     <h2>Espace membre</h2>
                 </a>
-                <a href="#">
+                <a href="{{ path('cars_home') }}">
 						<img src="{{asset('build/images/logo.jpg')}}" alt="logo">
 					</a>
         </section>	
         <section class="nav">
             <nav>                 
-                <a href="#">Berline</a>
-                <a href="#">Cabriolet</a>
-                <a href="#">SUV</a>
-                <a href="#">4X4</a>  
+                <a href="{{ path('cars_category', {'id': 203}) }}">Berline</a>
+                <a href="{{ path('cars_category', {'id': 206}) }}">Cabriolet</a>
+                <a href="{{ path('cars_category', {'id': 205}) }}">SUV</a>
+                <a href="{{ path('cars_category', {'id': 204}) }}">4X4</a>  
                 <a href="#">Mon Espace</a>            
             </nav>	
         </section>

@@ -76,14 +76,13 @@ class CarRepository extends ServiceEntityRepository
             $query = $query
             ->andWhere('c.id IN (:category)')
             ->setParameter('category', $search->category);
-            // dd($query);
         }
 
         return $query;
     }
 
     /**
-     * Récupère les produits en lien avec une recherche
+     * Récupère les véhicules en lien avec une recherche
      *
      * @return PaginatorInterface
      */
@@ -99,26 +98,30 @@ class CarRepository extends ServiceEntityRepository
      }
 
 
-
-
-
-
-    // /**
-    //  * @return Car[] Returns an array of Car objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Récupère les véhicules par leurs catégories
+     *
+     * @param [type] $id_category
+     * @return Car[]
+     */
+    public function getCarsByCategory($id_category)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->createQueryBuilder('car')
+                    ->join('car.category', 'c')
+                    ->select('car')
+                    ->where('c.id = :cat')
+                    ->setParameter(':cat', $id_category)
+                    ->getQuery()
+                    ->getResult();
+        
+        return $this->paginator->paginate(
+            $query,
+            1,
+            6
+        );
     }
-    */
+
+    
 
     /*
     public function findOneBySomeField($value): ?Car
