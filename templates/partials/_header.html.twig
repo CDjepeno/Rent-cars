@@ -1,22 +1,25 @@
 <header class="header_visiteur">
-        <section class="member">
-                {# <a href="index.php?class=users&action=logout">
-                    <h2>Déconnexion </h2>
-                </a>	 #}
-                <a href="#">
-                    <h2>Espace membre</h2>
-                </a>
-                <a href="{{ path('cars_home') }}">
-						<img src="{{asset('build/images/logo.jpg')}}" alt="logo">
-					</a>
-        </section>	
-        <section class="nav">
-            <nav>                 
-                <a href="{{ path('cars_category', {'id': 203}) }}">Berline</a>
-                <a href="{{ path('cars_category', {'id': 206}) }}">Cabriolet</a>
-                <a href="{{ path('cars_category', {'id': 205}) }}">SUV</a>
-                <a href="{{ path('cars_category', {'id': 204}) }}">4X4</a>  
-                <a href="#">Mon Espace</a>            
-            </nav>	
-        </section>
+    <section class="member">
+        {% if app.user %}
+            <a href="{{ path('account_logout')}}">
+                <h2>Déconnexion </h2>
+            </a>	
+        {% else %}
+            <a href="{{ path('account_login') }}">
+                <h2>Espace membre</h2>
+            </a>      
+        {% endif %}
+            <a href="{{ path('cars_home') }}">
+                <img src="{{asset('build/images/logo.jpg')}}" alt="logo">
+            </a>
+    </section>	
+    <section class="nav">
+        <nav>                 
+            <a href="{{ path('cars_category', {'id': 203}) }}">Berline</a>
+            <a href="{{ path('cars_category', {'id': 206}) }}">Cabriolet</a>
+            <a href="{{ path('cars_category', {'id': 205}) }}">SUV</a>
+            <a href="{{ path('cars_category', {'id': 204}) }}">4X4</a>  
+            <a href="#">Mon Espace</a>            
+        </nav>	
+    </section>
 </header>

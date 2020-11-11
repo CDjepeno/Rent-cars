@@ -25,6 +25,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('js/app', './assets/js/slider.js')
+    .addEntry('js/login', './assets/js/login.js')
     .addStyleEntry('css/app', './assets/styles/app.scss')
     .copyFiles({
         from: './assets/img',
