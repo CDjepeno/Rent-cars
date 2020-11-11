@@ -10,6 +10,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AccountController extends AbstractController
 {
     /**
+     * Permet de connecter un utilisateur
+     * 
      * @Route("/login", name="account_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -29,5 +31,19 @@ class AccountController extends AbstractController
      */
     public function logout() {
         // ..
+    }
+
+    /**
+     * Permet de d'afficher le compte de l'utilisateur connecter
+     * 
+     * @Route("/account", name="account_user")
+     *
+     * @return void
+     */
+    public function home()
+    {
+        return $this->render('user/index.html.twig', [
+            'user' => $this->getUser()
+        ]);
     }
 }

@@ -9,7 +9,7 @@
         <div class="col-4">
             <div class="card align-items-center">
                 <h1 class="title">Propriétaire</h1>
-                <a href="#">
+                <a href="{{ path('user_show', {'slug' : user.slug})}}">
                     <img src="{{ user.avatar }}" alt="avatar de {{ user.fullname }}" class="avatar">
                 </a>
                 <h3 class="my-3">{{ user.fullname }}</h3>

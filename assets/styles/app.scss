@@ -283,8 +283,12 @@ a, a:hover, a:visited, a:active {
         }
     }
 
-    .img {
+    img {
         @extend %style-img;
+
+        &:hover {
+            @extend %hover-img-down;
+        } 
     }
 
 
