@@ -1,6 +1,6 @@
 <article id="product">
     <section class="img">
-        <a href="#">
+        <a href="{{ path('car_show', {'slug' : car.slug}) }}">
         <img src="{{car.coverImage}}" alt="image de {{ car.title }}" />
         </a>
     </section>
@@ -11,5 +11,5 @@
     <div>
         <bold class="text-muted text-primary text-italic">#{{ car.category.name }}</bold>
     </div>
-    <a class="btn" href="#">Voir ce produit</a>
+    <a class="btn" href="{{ path('car_show', {'slug' : car.slug}) }}">Voir ce produit</a>
 </article>
