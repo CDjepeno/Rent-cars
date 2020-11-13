@@ -3,11 +3,15 @@
 {% block title %}Compte de {{user.fullname}}{% endblock %}
 
 {% block body %}
-{% for message in app.flashes %}
-    <div class="success">
-        {{ message }}
-    </div>
-{% endfor %}
+    {% for label,messages in app.flashes %}
+        <div class="container">
+            <div class="alert alert-{{label}} my-3">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
 <div class="container">
     <section class="row align-items-center" >
         <div class="col-3 text-center my-4">
@@ -22,7 +26,7 @@
                 <div class="my-3">
                     <a href="{{ path('update_account') }}" class="btn mr-2">Modifier mes informations</a>
                     <a href="#" class="btn mr-2">Modifier mon mot de passe</a>
-                    <a href="#" class="btn mr-2">Mes reservations</a>
+                    <a href="{{ path('user_bookings') }}" class="btn mr-2">Mes reservations</a>
                     <a href="#" class="btn mr-2">Ajouter un véhicule</a>
                 </div>
             {% else %}

@@ -3,11 +3,11 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('notice') %}
-        <div class="success">
+    {# {% for message in app.flashes('notice') %}
+        <div class="alertsuccess">
             {{ message }}
         </div>
-    {% endfor %}
+    {% endfor %} #}
     <form action="{{ path('account_login')}}" method="post" id="login" class="form_login">
         {% for label,messages in app.flashes %}
             <div class="container">

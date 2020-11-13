@@ -49,6 +49,20 @@ class Booking
      */
     private $car;
 
+    public function getDays()
+    {
+        $diff = $this->endDate->diff($this->startDate);
+        return $diff->days;
+    }
+
+    // public function amountRent() 
+    // {
+    //     if(empty($this->amount)) {
+
+    //         return $this->car->getPrice() * $this->getDays();
+    //     }
+    // }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Booking;
 use App\Form\RegistrationType;
 use App\Form\AccountUpdateType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -99,6 +100,19 @@ class AccountController extends AbstractController
             "form" => $form->createView()
         ]);
     }
+
+    /**
+     * Permet de récupérer les reservation de l'utilisateur
+     *
+     * @Route("/user/bookings/", name="user_bookings")
+     * 
+     * 
+     * @return Response
+     */
+    public function bookings() 
+    {   
+        return $this->render("account/bookings.html.twig");
+    }   
 
     /**
      * Permet de déconnecter un utilisateur
