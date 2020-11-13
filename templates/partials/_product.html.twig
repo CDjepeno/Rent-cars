@@ -12,8 +12,8 @@
         <bold class="text-muted text-primary text-italic">#{{ car.category.name }}</bold>
     </div>
     {% if app.user %}  
-        <a class="btn" href="{{ path('car_show', {'slug' : car.slug}) }}">Voir le véhicule</a>
-    {% else %}
         <a class="btn" href="{{ path('car_show', {'slug' : car.slug}) }}">Réserver ce véhicule</a>
+    {% else %}
+        <a class="btn" href="{{ path('car_show', {'slug' : car.slug}) }}">Voir le véhicule</a>
     {% endif %}
 </article>

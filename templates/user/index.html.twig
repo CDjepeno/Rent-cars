@@ -6,24 +6,50 @@
 <div class="container">
     <section class="row align-items-center" >
         <div class="col-3 text-center my-4">
+        {% if user is same as(app.user) %}
+            <h1 class="mb-5">{{ user.fullname }}</h1>
+        {% endif %}
             <img src="{{user.avatar}}" class="avatar mb-3" alt="photo de {{user.fullname}}"><br>
             <span class="badge badge-primary mb-3">{{user.cars | length}} annonces</span>
         </div>
         <div  class="col-9">      
-            <h1>{{ user.fullname }}</h1>
             {% if user is same as(app.user) %}
                 <div class="my-3">
                     <a href="#" class="btn mr-2">Modifier mes informations</a>
                     <a href="#" class="btn mr-2">Modifier mon mot de passe</a>
                     <a href="#" class="btn mr-2">Mes reservations</a>
+                    <a href="#" class="btn mr-2">Ajouter un véhicule</a>
                 </div>
+            {% else %}
+                <h1 class="mb-5">{{ user.fullname }}</h1>
             {% endif %}
         </div>
         {% if user.cars|length > 0 %}
             <div id="cars" class="row mb-4 mt-3">
-                {% for car in user.cars %}
-                        {% include 'partials/_product.html.twig' with {'car' : car}%}
-                {% endfor %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nom du véhicule</th>
+                            <th>prix</th>
+                            <th>catégorie</th>
+                            <th>image</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for car in user.cars %}
+                        <tr>
+                            <td>{{car.title}}</td>
+                            <td>{{car.price}}&euro;/jour</td>
+                            <td>{{car.category}}</td>
+                            <td><img src="{{car.coverImage}}" alt="{{car.title}}" class="img-table"></td>
+                            <td>
+                                <a href="#" class="alert alert-danger"><i class="fi-xnsuxl-trash-bin"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> 
             </div>         
         {% else %}
             <div class="alert alert-warning my-3">
@@ -32,4 +58,7 @@
         {% endif %}
     </section>
 </div>
+{% endblock %}
+{% block javascripts %}
+<script defer src="https://friconix.com/cdn/friconix.js"> </script>
 {% endblock %}

@@ -4,14 +4,17 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"email"}, message="Un utilisateur as déja cet email")
  */
 class User implements UserInterface
 {
@@ -29,28 +32,38 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="vous devez renseigner votre prénom")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="vous devez renseigner votre nom")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="vous devez renseigner votre email")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url(message="vous devez renseigner une url valide")
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="vous devez renseigner votre mot de passe")
      */
     private $hash;
+
+    /**
+     * @Assert\EqualTo(propertyPath="hash", message="Le mot de passe ne correspond pas !")
+     */
+    public $passwordConfirm;
 
     /**
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="user")
@@ -69,7 +82,7 @@ class User implements UserInterface
     }
 
     /**
-     * Permet d'initialiser le slug
+     * Permet d'initialiser le slug lors de l'insertion et la modification dans la base de donnée
      * 
      * @ORM\PrePersist
      * @ORM\PreUpdate

@@ -255,6 +255,34 @@ a, a:hover, a:visited, a:active {
     @extend %button-style;
 }
 
+img {
+    @extend %style-img;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 20rem;
+
+    &.avatar-micro {
+        max-width: 2rem;
+        max-height: 2rem;
+    }
+
+    &.avatar-mini {
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+
+    &.avatar-medium  {
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+}
+
+.img-table {
+    width: 5rem;
+}
+
 /***************************************************/
 /*********************** MAIN **********************/
 /***************************************************/
@@ -286,13 +314,9 @@ a, a:hover, a:visited, a:active {
         }
     }
 
-    img {
-        @extend %style-img;
-
-        &:hover {
-            @extend %hover-img-down;
-        } 
-    }
+    img:hover {
+        @extend %hover-img-down;
+    }  
 
 
     form {
