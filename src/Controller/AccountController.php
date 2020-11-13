@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Form\AccountUpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,8 @@ class AccountController extends AbstractController
      * Permet de connecter un utilisateur
      * 
      * @Route("/login", name="account_login")
+     * 
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -59,6 +62,41 @@ class AccountController extends AbstractController
         }
         return $this->render('account/registration.html.twig', [
             'form' =>  $form->createView()
+        ]);
+    }
+
+    /**
+     * Permet d'afficher et de gerer le formulaire de modification d'utilisateur
+     *
+     * @Route("/profile-update", name="update_account")
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * 
+     * @return Response
+     */    
+    public function updateProfile(Request $request, EntityManagerInterface $manager)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(AccountUpdateType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Votre compte a été modifié avec succès !"
+            );
+
+            return $this->redirectToRoute("account_user");
+        }
+
+        return $this->render("account/profileUpdate.html.twig",[
+            "form" => $form->createView()
         ]);
     }
 
