@@ -27,7 +27,7 @@
                     <a href="{{ path('update_account') }}" class="btn mr-2">Modifier mes informations</a>
                     <a href="#" class="btn mr-2">Modifier mon mot de passe</a>
                     <a href="{{ path('user_bookings') }}" class="btn mr-2">Mes reservations</a>
-                    <a href="#" class="btn mr-2">Ajouter un véhicule</a>
+                    <a href="{{ path('car_create') }}" class="btn mr-2">Ajouter un véhicule</a>
                 </div>
             {% else %}
                 <h1 class="mb-5">{{ user.fullname }}</h1>
@@ -35,7 +35,8 @@
         </div>
         {% if user.cars|length > 0 %}
             <div id="cars" class="row mb-4 mt-3">
-                <table class="table table-hover">
+                <h2 class="my-3">Mes véhicules</h2>
+                <table class="table table-hover mb-5">
                     <thead>
                         <tr>
                             <th>Nom du véhicule</th>
@@ -51,7 +52,10 @@
                             <td>{{car.title}}</td>
                             <td>{{car.price}}&euro;/jour</td>
                             <td>{{car.category}}</td>
-                            <td><img src="{{car.coverImage}}" alt="{{car.title}}" class="img-table"></td>
+                            <td>
+                                <img src="{{car.coverImage}}" alt="{{car.title}}" class="img-table">
+                                {# {{ asset('uploads/' ~ car.coverImage) }} #}
+                            </td>
                             <td>
                                 <a href="#" class="alert alert-danger"><i class="fi-xnsuxl-trash-bin"></i></a>
                             </td>

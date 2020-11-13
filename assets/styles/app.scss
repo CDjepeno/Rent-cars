@@ -347,12 +347,31 @@ img {
 
   
 /**************************************************/
-/****************** FORM_REGISTER *****************/
+/************* FORM_REGISTER/ FORM_ADD ************/
 /**************************************************/
-.form_register {
+.form_register, .form_add {
     @include form($background-form,50%,7rem);
     .firstname,.lastname,.email,.avatar,.mdp {
         @extend %form-style-td;
+        margin-bottom: 2rem;
+    }
+
+    textarea{
+        background : none;
+        border     : none;
+        outline    : none;
+        font-size  : 2rem;
+        color      : white;
+        width      : 100%;
+        margin-bottom: 2rem;
+    } 
+
+    #car_title, #car_price, #car_content, #car_image {
+        margin-bottom: 2rem;
+    }
+
+    #car_category {
+        margin-top: 2rem;
     }
 
     table {
