@@ -16,7 +16,7 @@
     <section class="row align-items-center" >
         <div class="col-3 text-center my-4">
         {% if user is same as(app.user) %}
-            <h1 class="mb-5">{{ user.fullname }}</h1>
+            <h2 class="mb-5">{{ user.fullname }}</h2>
         {% endif %}
             <img src="{{user.avatar}}" class="avatar avatar-medium mb-3" alt="photo de {{user.fullname}}"><br>
             <span class="badge badge-primary mb-3">{{user.cars | length}} annonces</span>
@@ -24,9 +24,9 @@
         <div  class="col-9">      
             {% if user is same as(app.user) %}
                 <div class="my-3">
-                    <a href="{{ path('update_account') }}" class="btn mr-2">Modifier mes informations</a>
+                    <a href="{{ path('account_update') }}" class="btn mr-2">Modifier mes informations</a>
                     <a href="#" class="btn mr-2">Modifier mon mot de passe</a>
-                    <a href="{{ path('user_bookings') }}" class="btn mr-2">Mes reservations</a>
+                    <a href="{{ path('account_user_bookings') }}" class="btn mr-2">Mes reservations</a>
                     <a href="{{ path('car_create') }}" class="btn mr-2">Ajouter un véhicule</a>
                 </div>
             {% else %}

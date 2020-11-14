@@ -13,10 +13,12 @@ class UserController extends AbstractController
      * Permet d'afficher le profil d'un utilisateur
      * 
      * @Route("/user/{slug}", name="user_show")
+     * 
+     * @return Response
      */
     public function index(User $user): Response
     {
-        return $this->render('user/bookings.html.twig', [
+        return $this->render('user/index.html.twig', [
             'user' =>  $user,
         ]);
     }

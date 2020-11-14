@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -69,7 +70,8 @@ class AccountController extends AbstractController
     /**
      * Permet d'afficher et de gerer le formulaire de modification d'utilisateur
      *
-     * @Route("/profile-update", name="update_account")
+     * @Route("/profile-update", name="account_update")
+     * @IsGranted("ROLE_USER")
      * 
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -104,8 +106,8 @@ class AccountController extends AbstractController
     /**
      * Permet de récupérer les reservation de l'utilisateur
      *
-     * @Route("/user/bookings/", name="user_bookings")
-     * 
+     * @Route("/user/bookings/", name="account_user_bookings")
+     * @IsGranted("ROLE_USER")
      * 
      * @return Response
      */
@@ -129,8 +131,9 @@ class AccountController extends AbstractController
      * Permet de d'afficher le compte de l'utilisateur connecter
      * 
      * @Route("/account", name="account_user")
+     * @IsGranted("ROLE_USER")
      *
-     * @return void
+     * @return Response
      */
     public function home()
     {

@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Car;
-use App\Data\SearchCarData;
 use App\Form\CarType;
+use App\Data\SearchCarData;
 use App\Form\SearchCarType;
-use App\Repository\CarRepository;
 use App\Service\Pagination;
+use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CarController extends AbstractController
@@ -64,6 +65,8 @@ class CarController extends AbstractController
      * Permet à l'utilisateur connecter de crée une annonce
      *
      * @Route("/car/new", name="car_create")
+     * 
+     * @IsGranted("ROLE_USER")
      * 
      * @param Request $request
      * @param EntityManagerInterface $manager

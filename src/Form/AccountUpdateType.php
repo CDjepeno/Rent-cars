@@ -15,10 +15,10 @@ class AccountUpdateType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class, $this->getconfiguration(false,"Modifier votre prénom","firstname"))
-            ->add('lastName', TextType::class, $this->getConfiguration(false,"Modifier votre nom","lastname"))
-            ->add('email', EmailType::class, $this->getConfiguration(false,"Modifier votre email","mail_register"))
-            ->add('avatar', UrlType::class, $this->getConfiguration(false,"Modifier votre image","avatar"))
+            ->add('firstName', TextType::class, $this->getconfiguration(false,"Modifier votre prénom"))
+            ->add('lastName', TextType::class, $this->getConfiguration(false,"Modifier votre nom"))
+            ->add('email', EmailType::class, $this->getConfiguration(false,"Modifier votre email"))
+            ->add('avatar', UrlType::class, $this->getConfiguration(false,"Modifier votre image"))
         ;
     }
 
