@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\BookingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\PrePersist;
+use App\Repository\BookingRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BookingRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Booking
 {
@@ -24,11 +27,13 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Type("\DateTimeInterface",message="veuillez rentrer un date valide")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Type("\DateTimeInterface",message="veuillez rentrer un date valide")
      */
     private $endDate;
 
@@ -38,7 +43,7 @@ class Booking
     private $amount;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="car")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
     private $booker;
@@ -49,6 +54,28 @@ class Booking
      */
     private $car;
 
+    /**
+     * Callback Permet d'initialiser une date et un montant total au moment de presister dans la bdd
+     * 
+     * @ORM\PrePersist
+     *
+     */
+    public function prepersist()
+    {
+        if(empty($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+
+        if(empty($this->amount)) {
+            $this->amount = $this->car->getPrice() * $this->getDays();
+        }
+    }
+
+    /**
+     * Calcule les jours entre la date d'arriver et la date de départ
+     *
+     * @return void
+     */
     public function getDays()
     {
         $diff = $this->endDate->diff($this->startDate);

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation de véhicule{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mt-5">Réserver pour le véhicule : <em>{{ car.title }}</em></h1>
+    <p>Vous êtes sur le point de réserver le véhicule de <strong>{{ car.user.fullname }}</strong></p>
+    {{ form_start(form, {'attr' : {class :'form_book', id : "booking"}}) }}
+        <h3 class="py-4">Quelles sont les dates qui vous intéressent !</h3>
+        <div class="row py-5">
+            <div class="col">
+                {{form_widget(form.startDate)}}
+            </div>
+            <div class="col">
+                {{form_widget(form.endDate)}}
+            </div>
+        </div>
+        <h4 class="py-3">Montant de la location : <span id="amount">...</span> &euro;</h4>
+        <p><span id="days" class="mt-4">0</span> jour(s) à {{ car.price }} €/ jour</p>
+
+        <button type="submit" class="btn" name="submit_book">Je reserve !</button
+    {{ form_end(form) }}
+</div>
+{% endblock %}

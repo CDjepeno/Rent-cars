@@ -35,7 +35,11 @@
         </div>
         {% if user.cars|length > 0 %}
             <div id="cars" class="row mb-4 mt-3">
+                {% if app.user %}
                 <h2 class="my-3">Mes véhicules</h2>
+                {% else %}
+                <h2 class="my-3">Ces véhicules</h2>
+                {% endif %}
                 <table class="table table-hover mb-5">
                     <thead>
                         <tr>
@@ -53,12 +57,14 @@
                             <td>{{car.price}}&euro;/jour</td>
                             <td>{{car.category}}</td>
                             <td>
-                                <img src="{{car.coverImage}}" alt="{{car.title}}" class="img-table">
+                                <a href="{{path('car_show', {slug : car.slug})}}"><img src="{{car.coverImage}}" alt="{{car.title}}" class="img-table"></a>
                                 {# {{ asset('uploads/' ~ car.coverImage) }} #}
                             </td>
+                            {% if app.user %}
                             <td>
                                 <a href="#" class="alert alert-danger"><i class="fi-xnsuxl-trash-bin"></i></a>
                             </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

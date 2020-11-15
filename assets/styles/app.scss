@@ -29,11 +29,11 @@ $background-form : rgba(255, 255, 255, 0.404);
 
 @mixin form($color,$width,$margin) {
     background-color : $color;
-	border-radius : 10px ;
-    margin        : $margin auto;
-	width         : $width;
-	padding       : 30px 30px;
-    text-align    : center;
+	border-radius    : 10px ;
+    margin           : $margin auto;
+	width            : $width;
+	padding          : 30px 30px;
+    text-align       : center;
     table {
         margin: auto;
     }
@@ -228,9 +228,9 @@ html {
         font-family       : "Open Sans", Arial, sans-serif;
 
         .container {
-            text-align: center;
-            width: 80%;
-            margin: auto;
+            text-align : center;
+            width      : 80%;
+            margin     : auto;
         }
 
         a,p,span,h1,h2 {
@@ -238,7 +238,7 @@ html {
         }
     
         img {
-            max-width: 100%;
+            max-width : 100%;
         }
     }
 }
@@ -260,24 +260,24 @@ img {
 }
 
 .avatar {
-    border-radius: 50%;
-    width: 20rem;
+    border-radius : 50%;
+    width         : 20rem;
 
     &.avatar-micro {
-        max-width: 2rem;
+        max-width : 2rem;
     }
 
     &.avatar-mini {
-        max-width: 5rem;
+        max-width : 5rem;
     }
 
     &.avatar-medium  {
-        max-width: 10rem;
+        max-width : 10rem;
     }
 }
 
 .img-table {
-    width: 5rem;
+    width : 5rem;
 }
 
 /***************************************************/
@@ -317,43 +317,53 @@ img {
 
 
     form {
-        background-color: black;
-        padding: 3rem;
-        display:block;
-        position:sticky;
-        top:20rem;
-        text-align: left;
+        background-color : black;
+        text-align       : left;
+        padding          : 3rem;
+        display          :block;
+        position         :sticky;
+        top              :20rem;
 
         label.form-check-label {
-            color: white;
-            margin-left: 2rem;
+            margin-left : 2rem;
+            color       : white;
         }  
 
         .noUi-connect {
-            background: blue;
+            background : blue;
         }
 
         #car {
-            font-size: 1.5rem;
+            font-size : 1.5rem;
         }
         #min {
-            font-size: 1.5rem;
+            font-size : 1.5rem;
         }
         #max {
-            font-size: 1.5rem;
+            font-size : 1.5rem;
         }
     }
 }
 
-  
+/**************************************************/
+/******************** FORM_BOOK *******************/
+/**************************************************/
+.form_book {
+    @include form(rgba(255, 255, 255, 0.3),60%,5rem);
+
+    span {
+        color : white;
+    }
+}
 /**************************************************/
 /************* FORM_REGISTER/ FORM_ADD ************/
 /**************************************************/
 .form_register, .form_add {
-    @include form($background-form,50%,7rem);
+    @include form($background-form,35%,7rem);
+
     .firstname,.lastname,.email,.avatar,.mdp {
         @extend %form-style-td;
-        margin-bottom: 2rem;
+        margin-bottom : 2rem;
     }
 
     textarea{
@@ -390,7 +400,7 @@ img {
 /******************* FORM_LOGIN *******************/
 /*************************************************/
 .form_login {
-    @include form(rgba(0, 0, 0, 0.404),35%,7rem);
+    @include form(rgba(0, 0, 0, 0.404),60%,7rem);
     h1 {
         color:white;
     } 
