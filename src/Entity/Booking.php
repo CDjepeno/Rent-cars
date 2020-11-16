@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=BookingRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
-class Booking
+class Booking 
 {
     /**
      * @ORM\Id
@@ -72,6 +72,52 @@ class Booking
     }
 
     /**
+     * Permet de vérifier la disponibilité d'un véhicule
+     *
+     * @return boolean
+     */
+    public function isbookableDates() 
+    {
+        $notAvailableDay = $this->car->getNotAvailableDays();
+        $daybook         = $this->getDaysBooking();
+
+        $formatday = function($day){
+            return $day->format('y-m-d');
+        };
+
+        $notAvailableDay = array_map($formatday,$notAvailableDay);
+        $daybook         = array_map($formatday,$daybook);
+
+        foreach($daybook as $day){
+            if(in_array($day,$notAvailableDay)){
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Permet de récupérer les jours de la réservation sous forme de DateTime(y-m-d)
+     *
+     * @return array
+     */
+    public function getDaysBooking()
+    {
+        $result = range(
+            $this->startDate->getTimestamp(),
+            $this->endDate->getTimestamp(),
+            24 * 60 *60
+        );
+
+        $day = array_map(function($timestamp){
+            return new \DateTime(date('y-m-d',$timestamp));
+        },$result);
+
+        return $day;
+    }
+
+    /**
      * Calcule les jours entre la date d'arriver et la date de départ
      *
      * @return void
@@ -81,14 +127,6 @@ class Booking
         $diff = $this->endDate->diff($this->startDate);
         return $diff->days;
     }
-
-    // public function amountRent() 
-    // {
-    //     if(empty($this->amount)) {
-
-    //         return $this->car->getPrice() * $this->getDays();
-    //     }
-    // }
 
     public function getId(): ?int
     {

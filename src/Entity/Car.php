@@ -65,11 +65,11 @@ class Car
      */
     private $bookings;
 
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
     }
-
 
     /**
      * Permet d'initialiser le slug
@@ -84,6 +84,33 @@ class Car
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->title);
         }
+    }
+
+    /**
+     * Permet de récupérer les journées non disponible pour ce véhicule
+     *
+     * @return Array
+     */
+    public function getNotAvailableDays()
+    {
+        $notAvailableDays = [];
+
+        foreach($this->bookings as $booking) {
+            $result = range(
+                $booking->getStartDate()->getTimestamp(),
+                $booking->getEndDate()->getTimestamp(),
+                24*60*60
+            );
+
+            $days = array_map(function($dayTimestamp){
+                return new \DateTime(date('y-m-d', $dayTimestamp));
+            }, $result);
+
+            $notAvailableDays = array_merge($notAvailableDays, $days);
+            
+        }
+        // dd($notAvailableDays);
+        return $notAvailableDays;
     }
 
     public function getId(): ?int

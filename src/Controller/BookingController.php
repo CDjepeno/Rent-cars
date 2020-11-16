@@ -29,20 +29,28 @@ class BookingController extends AbstractController
         $form    = $this->createForm(BookingType::class,$booking);
 
         $form->handleRequest($request);
-        
+
         if($form->isSubmitted() && $form->isValid()) {
+            
             $user = $this->getUser();
 
             $booking->setBooker($user)
                     ->setCar($car);
 
-            $manager->persist($booking);
-            $manager->flush();
+            if($booking->isbookableDates()) {
+    
+                $manager->persist($booking);
+                $manager->flush();
+    
+                return $this->redirectToRoute('booking_show', ['id' => $booking->getId(), 'withAlert' => true]);
+            } else {
+                $this->addFlash(
+                    "danger",
+                    "Le véhicule est déja réserver aux dates choisies"
+                );
+            }
 
-            return $this->redirectToRoute('booking_show', ['id' => $booking->getId(), 'withAlert' => true]);
         }
-
-
         return $this->render('booking/book.html.twig', [
             'car' => $car,
             'form' => $form->createView()
@@ -55,6 +63,7 @@ class BookingController extends AbstractController
      * @Route("/booking/{id}", name="booking_show")
      * 
      * @param Booking $booking
+     * 
      * @return Response
      */
     public function show(Booking $booking) 

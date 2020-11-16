@@ -4,6 +4,15 @@
 
 {% block body %}
 <div class="container">
+    {% for label,messages in app.flashes %}
+        <div class="container my-4">
+            <div class="alert alert-{{label}}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
     <h1 class="mt-5">Réserver pour le véhicule : <em>{{ car.title }}</em></h1>
     <p>Vous êtes sur le point de réserver le véhicule de <strong>{{ car.user.fullname }}</strong></p>
     {{ form_start(form, {'attr' : {class :'form_book', id : "booking"}}) }}
@@ -22,4 +31,6 @@
         <button type="submit" class="btn" name="submit_book">Je reserve !</button
     {{ form_end(form) }}
 </div>
+{% endblock %}
+{% block javascripts %}
 {% endblock %}
