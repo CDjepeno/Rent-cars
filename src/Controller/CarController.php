@@ -64,7 +64,7 @@ class CarController extends AbstractController
     /**
      * Permet à l'utilisateur connecter de crée une annonce
      *
-     * @Route("/car/new", name="car_create")
+     * @Route("/car/new/create", name="car_create")
      * 
      * @IsGranted("ROLE_USER")
      * 
@@ -114,7 +114,7 @@ class CarController extends AbstractController
     /**
      * Permet d'afficher la page d'un véhicule
      *
-     * @Route("/car/{slug}", name="car_show")
+     * @Route("/car/{slug}/show", name="car_show")
      * 
      * @param Car $car
      * @return Response
@@ -126,4 +126,31 @@ class CarController extends AbstractController
         ]);
     }
     
+    /**
+     * Permet de supprimer un véhicule
+     * 
+     * @Route("/logout/{slug}", name="car_delete")
+     *
+     * @return void
+     */
+    public function delete(Car $car, EntityManagerInterface $manager)
+    {
+        if(count($car->getBookings()) > 0) {
+            $this->addFlash(
+                'danger',
+                'Vous ne pouvez pas supprimer ce véhicule car il as des reservations à venir ou en cour'
+            );
+        } else {
+            $manager->remove($car);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Le véhicule {$car->getTitle()} bien été supprimer"
+            );
+        }
+
+        return $this->redirectToRoute('account_user');
+
+    }
 }
