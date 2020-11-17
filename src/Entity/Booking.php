@@ -28,12 +28,15 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTimeInterface",message="veuillez rentrer un date valide")
+     * @Assert\GreaterThan("today", message="La date d'arriver doit être ultérieure à la date d'aujourd'hui !")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTimeInterface",message="veuillez rentrer un date valide")
+     * @Assert\GreaterThan(propertyPath="startDate", message="La date de départ doit être plus éloigner que la date d'arriver")
+     * 
      */
     private $endDate;
 
@@ -98,7 +101,7 @@ class Booking
     }
 
     /**
-     * Permet de récupérer les jours de la réservation sous forme de DateTime(y-m-d)
+     * Permet de récupérer les jours de la réservation sous forme de journée DateTime(y-m-d)
      *
      * @return array
      */

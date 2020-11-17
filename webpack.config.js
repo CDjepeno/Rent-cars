@@ -27,6 +27,7 @@ Encore
     .addEntry('js/app', './assets/js/slider.js')
     .addEntry('js/login', './assets/js/login.js')
     .addEntry('js/register', './assets/js/register.js')
+    .addEntry('js/datepicker', './assets/js/datepicker.js')
     .addStyleEntry('css/app', './assets/styles/app.scss')
     .copyFiles({
         from: './assets/img',
