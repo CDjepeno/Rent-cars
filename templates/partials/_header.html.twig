@@ -14,11 +14,14 @@
             </a>
     </section>	
     <section class="nav">
-        <nav>                 
-            <a href="{{ path('cars_category', {'id': 207}) }}">Berline</a>
-            <a href="{{ path('cars_category', {'id': 210}) }}">Cabriolet</a>
-            <a href="{{ path('cars_category', {'id': 209}) }}">SUV</a>
-            <a href="{{ path('cars_category', {'id': 208}) }}">4X4</a>  
+        <nav> 
+            {# {% for category in categories %}
+            <a href="{{ path('cars_category', {'id': category.id}) }}">{{category.name}}</a>
+            {% endfor %}                 #}
+            <a href="{{ path('cars_category', {'id': 211}) }}">Berline</a>
+            <a href="{{ path('cars_category', {'id': 214}) }}">Cabriolet</a>
+            <a href="{{ path('cars_category', {'id': 213}) }}">SUV</a>
+            <a href="{{ path('cars_category', {'id': 212}) }}">4X4</a>  
             {% if app.user %}
                 <a href="{{ path('account_user')}}">Mon Espace</a>
             {% endif %}            

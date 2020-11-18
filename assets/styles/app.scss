@@ -362,7 +362,7 @@ img {
 /************* FORM_REGISTER/ FORM_ADD ************/
 /**************************************************/
 .form_register, .form_add {
-    @include form($background-form,35%,7rem);
+    @include form($background-form,50%,5rem);
 
     .firstname,.lastname,.email,.avatar,.mdp {
         @extend %form-style-td;
@@ -403,7 +403,7 @@ img {
 /******************* FORM_LOGIN *******************/
 /*************************************************/
 .form_login {
-    @include form(rgba(0, 0, 0, 0.404),60%,7rem);
+    @include form(rgba(0, 0, 0, 0.404),30%,7rem);
     h1 {
         color:white;
     } 

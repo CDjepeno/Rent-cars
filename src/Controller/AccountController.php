@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Booking;
+use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
 use App\Form\AccountUpdateType;
+use App\Form\PasswordUpdateType;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -141,4 +144,48 @@ class AccountController extends AbstractController
             'user' => $this->getUser()
         ]);
     }
+
+    /**
+     * Permet à l'utilisateur de modifier sont mot de passe
+     *
+     * @Route("/account/password-update", name="password_update")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordEncoderInterface $encoder
+     * 
+     * @return Response
+     */
+    public function passwordUpdate(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) 
+     {
+         $password = new PasswordUpdate();
+
+         $form     = $this->createForm(PasswordUpdateType::class,$password);
+
+         $form->handleRequest($request);
+
+         if($form->isSubmitted() && $form->isValid()) {
+             $user = $this->getUser();
+
+             if(!password_verify($password->getOldPassword(),$user->getHash())) {
+                $form->get('oldPassword')->addError(new FormError("le mot de passe ne correpond pas a votre actuel mot de passe"));
+             } else {
+
+                 $hash = $encoder->encodePassword($user,$password->getNewPassword());
+
+                 $user    ->setHash($hash);
+                 $manager ->persist($user);
+                 $manager ->flush();
+
+                 $this->addFlash(
+                     'success',
+                     'Votre mot de passe à bien été modifié'
+                 );
+             }
+         }
+
+        return $this->render('account/passwordUpdate.html.twig',[
+            'form' => $form->createView()
+        ]);
+     }
 }

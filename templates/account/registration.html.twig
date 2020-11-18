@@ -10,33 +10,32 @@
                 <span id='erreur_register'></span>
             <tr>
                 <td class="firstname">
-                    {{ form_widget(form.firstName)}}
+                    {{ form_row(form.firstName)}}
                 </td>
             </tr>
             <tr>
                 <td class="lastname">
-                    {{ form_widget(form.lastName)}}
+                    {{ form_row(form.lastName)}}
                 </td>
             </tr>
             <tr>
                 <td class="email">
-                    {{ form_widget(form.email)}}
+                    {{ form_row(form.email)}}
                 </td>
             </tr>
             <tr>
                 <td class="avatar">
-                    {{ form_widget(form.avatar)}}
+                    {{ form_row(form.avatar)}}
                 </td>
             </tr>
             <tr>
                 <td class="mdp">
-                    {{ form_widget(form.hash)}}
+                    {{ form_row(form.hash)}}
                 </td>
             </tr>
             <tr>
                 <td class="mdp">
-                    {{ form_errors(form.passwordConfirm) }}
-                    {{ form_widget(form.passwordConfirm)}}
+                    {{ form_row(form.passwordConfirm)}}
                 </td>
             </tr>
             <tr>
