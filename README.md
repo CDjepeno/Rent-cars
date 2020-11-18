@@ -6,3 +6,10 @@
 ![icon](https://user-images.githubusercontent.com/43074465/98969194-e5329780-250e-11eb-8b4b-40c3c1edad88.png)
 # Rent-cars
 (Symfony) Site de location de véhicule
+- Gestion des formulaires.
+- Fixtures
+- Système de filtre (slider) en javascript.
+- Gestion des réservations.
+- Mise en place d'une pagination avec KnpPaginator.
+- Mofdification de profil.
+- Ajout de véhicule
