@@ -11,5 +11,5 @@
 - Système de filtre (slider) en javascript.
 - Gestion des réservations.
 - Mise en place d'une pagination avec KnpPaginator.
-- Mofdification de profil.
+- Modification de profil.
 - Ajout de véhicule
