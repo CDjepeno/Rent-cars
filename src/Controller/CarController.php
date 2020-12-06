@@ -129,7 +129,7 @@ class CarController extends AbstractController
     /**
      * Permet de supprimer un véhicule
      * 
-     * @Route("/logout/{slug}", name="car_delete")
+     * @Route("/delete/{slug}", name="car_delete")
      *
      * @return void
      */

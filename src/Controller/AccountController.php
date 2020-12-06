@@ -73,17 +73,20 @@ class AccountController extends AbstractController
     /**
      * Permet d'afficher et de gerer le formulaire de modification d'utilisateur
      *
-     * @Route("/profile-update", name="account_update")
-     * @IsGranted("ROLE_USER")
+     * @Route("/profile-update/{id}", name="account_update")
+     * @IsGranted("CAN_EDIT_PROFILE", subject="id")
+     * 
      * 
      * @param Request $request
      * @param EntityManagerInterface $manager
      * 
      * @return Response
      */    
-    public function updateProfile(Request $request, EntityManagerInterface $manager)
+    public function updateProfile(Request $request, EntityManagerInterface $manager,$id)
     {
         $user = $this->getUser();
+
+        $this->denyAccessUnlessGranted('CAN_EDIT_PROFILE', $user->getId(), "Vous n'êtes pas le propriétaire de cette catégorie");
 
         $form = $this->createForm(AccountUpdateType::class, $user);
 
