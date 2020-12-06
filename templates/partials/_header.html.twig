@@ -15,13 +15,10 @@
     </section>	
     <section class="nav">
         <nav> 
-            {# {% for category in categories %}
-            <a href="{{ path('cars_category', {'id': category.id}) }}">{{category.name}}</a>
-            {% endfor %}                 #}
-            <a href="{{ path('cars_category', {'id': 211}) }}">Berline</a>
-            <a href="{{ path('cars_category', {'id': 214}) }}">Cabriolet</a>
-            <a href="{{ path('cars_category', {'id': 213}) }}">SUV</a>
-            <a href="{{ path('cars_category', {'id': 212}) }}">4X4</a>  
+            {% for category in categories.findAll %}
+                <a href="{{ path('cars_category', {'id': category.id}) }}">{{category.name}}</a>
+            {% endfor %}                
+            
             {% if app.user %}
                 <a href="{{ path('account_user')}}">Mon Espace</a>
             {% endif %}            
