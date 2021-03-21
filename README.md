@@ -37,3 +37,13 @@ $ git clone https://github.com/CDjepeno/Rent_cars-Symfony.git
 ```bash
 $ cd rent-car-Symfony
 ```
+```bash
+$ composer install
+$ npm install
+```
+```bash
+$ Symfony server-start -d
+or
+$ php -S localhost:8000 -t public
+```
+
