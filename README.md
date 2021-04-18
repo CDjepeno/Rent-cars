@@ -27,6 +27,7 @@ Rent_cars
 - Mise en place d'une pagination avec KnpPaginator.
 - Modification de profil.
 - Ajout de véhicule
+- Système d'authentification
 
 ## Getting Started
 ```bash
